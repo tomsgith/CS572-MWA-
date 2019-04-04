@@ -1,0 +1,30 @@
+
+
+
+   *******
+      1
+  *********
+
+
+setTimeout    - queues its callback to be executed after whatever in the queue.
+setImmediate  - doesn't queue its callback but schedules it to the check phase of the event loop (after I/O events).
+
+   *******
+      2
+  *********
+process.nextTick  - is executed right after current operation ends (blocking)
+setImmediate      - runs in the check phase of the event loop (non-blocking)
+
+   *******
+      3
+  *********
+1. Array
+2. setImmediate
+3. Promise
+4. Buffer
+5. v8
+6. https
+7. URL
+8. JSON
+9. require
+10. os
