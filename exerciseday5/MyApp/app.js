@@ -17,6 +17,8 @@ app.set('view engine', 'jade');
 app.set('trust proxy',true)
 app.set('strict routing',true)
 
+
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -40,6 +42,10 @@ app.get('/users',async function(request,response){
  const data={"tomas":"mew"};
   response.status(200);
   response.set('Content-Type','application/json');
+  response.setHeader('Last-Modified',new Date());
+  response.setHeader('cache-Control','private, max-age=86400');
+  response.setHeader('If-Modified-Since',new Date());
+  response.setHeader('Link','<http://localhost:3000/users?p=1> rel="first"');
   const t= await axios.get('https://randomuser.me/api/?results=10')
   console.log("heeeeeeeee");
   console.log(t);
