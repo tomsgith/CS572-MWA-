@@ -1,0 +1,4 @@
+1.db.cities.aggregate([{$match:{state:"WA"}},{$project:{_id:0,zipcode:"$_id"}},{$sort:{zipcode:1}}])
+2.db.cities.aggregate([{$match:{_id:{$lt:"5000"}}},{$project:{_id:0,zipcode:"$_id"}}])
+3.db.cities.aggregate([{$group:{_id:{"city":"$city","state":"$state"},count:{$sum:1}}},{$match:{count:{$gt:1}}},{$sort:{"_id.state":1,"_id.city":1}}])
+4.db.cities.aggregate([{$group:{_id:{"state":"$state","city":"$city"},population:{$sum:"$pop"}}},{$sort:{population:1}},{$group:{_id:"$_id.state",city:{$first:"$_id.city"}}},{$sort:{_id:1}}])
